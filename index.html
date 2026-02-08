@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Chocolate Day ❤️</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #f7d9c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+      max-width: 420px;
+      animation: pulse 1.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    h1 {
+      color: #d6336c;
+      font-size: 28px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #444;
+    }
+
+    button {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #c9184a;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>🍫 Happy Chocolate Day 🍫</h1>
+
+    <p>
+      To the sweetest girl in my life 🥰🍩<br>
+      You make every day more beautiful 💖✨
+    </p>
+
+    <p>
+      From <b>Mannat</b> to my favorite person 💕
+    </p>
+
+    <button onclick="playVoice()">🎙️ Tap for Surprise</button>
+  </div>
+
+  <script>
+    function playVoice() {
+      window.speechSynthesis.cancel();
+
+      const msg = new SpeechSynthesisUtterance(
+        "Happy Chocolate Day to my favorite person"
+      );
+
+      msg.lang = "en-US";
+      msg.pitch = 1.4;   // cute female tone 💕
+      msg.rate = 0.9;
+      msg.volume = 1;
+
+      const voices = speechSynthesis.getVoices();
+      for (let i = 0; i < voices.length; i++) {
+        if (voices[i].name.toLowerCase().includes("google")) {
+          msg.voice = voices[i];
+          break;
+        }
+      }
+
+      speechSynthesis.speak(msg);
+    }
+  </script>
+</body>
+</html>
