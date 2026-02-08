@@ -2,114 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy Chocolate Day ❤️</title>
+  <title>Happy Chocolate Day Betuu 🍫❤️</title>
 
   <style>
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      background: linear-gradient(135deg, #3e2723, #6d4c41);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Comic Sans MS', cursive;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      color: #fff;
       text-align: center;
     }
 
     .card {
-      background: white;
+      background: rgba(255, 255, 255, 0.15);
       padding: 30px;
-      border-radius: 25px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+      border-radius: 20px;
+      width: 90%;
       max-width: 420px;
-      animation: pop 1.5s infinite alternate;
-    }
-
-    @keyframes pop {
-      from { transform: scale(1); }
-      to { transform: scale(1.05); }
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
     }
 
     h1 {
-      color: #d6336c;
-      font-size: 28px;
+      color: #ffccbc;
+      font-size: 32px;
+      margin-bottom: 10px;
     }
 
     p {
       font-size: 18px;
-      color: #444;
+      line-height: 1.6;
     }
 
-    button {
-      background: #ff4d6d;
-      color: white;
-      border: none;
-      padding: 14px 24px;
-      border-radius: 25px;
-      font-size: 18px;
-      cursor: pointer;
-      margin-top: 15px;
+    .choco {
+      font-size: 40px;
+      animation: bounce 1.5s infinite;
     }
 
-    button:hover {
-      background: #c9184a;
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      color: #ff8a80;
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-120vh); opacity: 0; }
     }
   </style>
 </head>
 
 <body>
+
   <div class="card">
-    <h1>🍫 Happy Chocolate Day 🍫</h1>
-
+    <div class="choco">🍫</div>
+    <h1>Happy Chocolate Day Betuu ❤️</h1>
     <p>
-      To the sweetest girl in my life 🥰🍩<br>
-      You make every day special 💖
+      Just like chocolate,<br>
+      you make my life sweeter every day 🍬<br><br>
+      Every smile of yours is my favorite flavor,<br>
+      and every moment with you melts my heart 💕<br><br>
+      From <b>Mannat</b> to my beautiful <b>Betuu</b> 💖
     </p>
-
-    <p>
-      From <b>Mannat</b> 💕
-    </p>
-
-    <button onclick="playFemaleVoice()">🎙️ Tap for Surprise</button>
   </div>
 
   <script>
-    function playFemaleVoice() {
-      window.speechSynthesis.cancel();
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
 
-      const msg = new SpeechSynthesisUtterance(
-        "Happy Chocolate Day to my favorite person"
-      );
-
-      msg.lang = "en-US";
-      msg.pitch = 1.4;   // higher pitch = cute 💕
-      msg.rate = 0.9;
-      msg.volume = 1;
-
-      // Load voices properly
-      let voices = speechSynthesis.getVoices();
-
-      if (!voices.length) {
-        speechSynthesis.onvoiceschanged = () => {
-          voices = speechSynthesis.getVoices();
-        };
-      }
-
-      // Try to select female voice
-      for (let i = 0; i < voices.length; i++) {
-        const name = voices[i].name.toLowerCase();
-        if (
-          name.includes("female") ||
-          name.includes("woman") ||
-          name.includes("google")
-        ) {
-          msg.voice = voices[i];
-          break;
-        }
-      }
-
-      speechSynthesis.speak(msg);
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
     }
+
+    setInterval(createHeart, 400);
   </script>
+
 </body>
 </html>
