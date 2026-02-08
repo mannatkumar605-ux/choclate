@@ -8,7 +8,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ffb6c1, #f7d9c4);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -17,15 +17,15 @@
     }
 
     .card {
-      background: #fff;
+      background: white;
       padding: 30px;
       border-radius: 25px;
       box-shadow: 0 0 25px rgba(0,0,0,0.2);
       max-width: 420px;
-      animation: pulse 1.5s infinite alternate;
+      animation: pop 1.5s infinite alternate;
     }
 
-    @keyframes pulse {
+    @keyframes pop {
       from { transform: scale(1); }
       to { transform: scale(1.05); }
     }
@@ -63,18 +63,18 @@
 
     <p>
       To the sweetest girl in my life 🥰🍩<br>
-      You make every day more beautiful 💖✨
+      You make every day special 💖
     </p>
 
     <p>
-      From <b>Mannat</b> to my favorite person 💕
+      From <b>Mannat</b> 💕
     </p>
 
-    <button onclick="playVoice()">🎙️ Tap for Surprise</button>
+    <button onclick="playFemaleVoice()">🎙️ Tap for Surprise</button>
   </div>
 
   <script>
-    function playVoice() {
+    function playFemaleVoice() {
       window.speechSynthesis.cancel();
 
       const msg = new SpeechSynthesisUtterance(
@@ -82,13 +82,27 @@
       );
 
       msg.lang = "en-US";
-      msg.pitch = 1.4;   // cute female tone 💕
+      msg.pitch = 1.4;   // higher pitch = cute 💕
       msg.rate = 0.9;
       msg.volume = 1;
 
-      const voices = speechSynthesis.getVoices();
+      // Load voices properly
+      let voices = speechSynthesis.getVoices();
+
+      if (!voices.length) {
+        speechSynthesis.onvoiceschanged = () => {
+          voices = speechSynthesis.getVoices();
+        };
+      }
+
+      // Try to select female voice
       for (let i = 0; i < voices.length; i++) {
-        if (voices[i].name.toLowerCase().includes("google")) {
+        const name = voices[i].name.toLowerCase();
+        if (
+          name.includes("female") ||
+          name.includes("woman") ||
+          name.includes("google")
+        ) {
           msg.voice = voices[i];
           break;
         }
